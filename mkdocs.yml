@@ -1,0 +1,105 @@
+# Project information
+site_name: { { cookiecutter.project_name } }
+site_url: https://Borg93.github.io/riks_ds_utils
+site_author: { { cookiecutter.maintainer } }
+site_description: >-
+  Work in progress ...
+repo_name: Borg93/riks_ds_utils
+repo_url: { { cookiecutter.repo_url } }
+
+# Copyright
+copyright: Copyright &copy; 2023 Riksarkivet
+
+# Configuration
+theme:
+  name: material
+  custom_dir: docs/overrides/
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - announce.dismiss
+    - toc.follow
+
+  language: en
+  palette:
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/fav-removebg-preview.png
+  icon:
+    logo: logo
+  logo: assets/fav-removebg-preview.png
+
+plugins:
+  - tags
+  - search
+  - mkdocs-jupyter:
+      include_source: True
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/Riksarkivet
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/Riksarkivet
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/Riksarkivet/
+  generator: false
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:materialx.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Page tree
+nav:
+  - Readme: README.md

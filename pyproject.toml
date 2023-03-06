@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+addopts = "-v --cov=riks_ds_utils"
+testpaths = ["tests/unit"]
+
+[tool.mypy]
+mypy_path = "src"
+check_untyped_defs = true
+disallow_any_generics = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+strict_equality = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+no_implicit_reexport = true
+
+[tool.black]
+line-length = 200
+
+[tool.isort]
+profile = "black"
+lines_after_imports = 2
+known_first_party = ["package_name"]
+known_third_party = ["numpy", "pandas", "pandera", "sklearn", "tqdm", "pytest"]
