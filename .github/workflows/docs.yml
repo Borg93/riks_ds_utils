@@ -1,9 +1,6 @@
 name: Automatic generating docs for 📦
 
-on:
-  push:
-    tags:
-      - "docs v*"
+on: workflow_dispatch
 
 permissions:
   contents: write
