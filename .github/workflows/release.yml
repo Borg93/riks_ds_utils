@@ -8,7 +8,7 @@ on:
   #   types: [published]
 
 jobs:
-  deploy:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
