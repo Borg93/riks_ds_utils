@@ -1,4 +1,4 @@
-name: auto docs
+name: Auto :octocat: Docs 📃
 on:
   push:
     tags:
