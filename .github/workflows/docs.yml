@@ -1,9 +1,12 @@
 name: auto docs
 on:
   push:
-    tags: -'docs v*.*'
+    tags:
+      - "docs v*"
+
 permissions:
   contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,9 +17,8 @@ jobs:
           python-version: 3.9
       - uses: actions/cache@v2
         with:
-          
           key: ${{ github.ref }}
-          
+
           path: .cache
       - run: make docs_install
       - run: mkdocs gh-deploy --force
