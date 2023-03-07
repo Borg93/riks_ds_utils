@@ -138,7 +138,7 @@ docker_build:
 	@echo dont forget to remove image or rebuild it..
 
 docs_install:
-	pip install build mkdocs == 1.4.2
-	pip install build mkdocs-material == 8.5.11
-	pip install build mkdocs-jupyter == 0.22.0
-
+	pip install 'mkdocs ==1.4.2'
+	pip install 'mkdocs-material ~=8.5.11'
+	pip install 'mkdocs-jupyter ~=0.22.0'
+	pip install 'mkdocstrings[python]'

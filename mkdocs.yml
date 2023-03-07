@@ -1,11 +1,11 @@
 # Project information
-site_name: { { cookiecutter.project_name } }
+site_name: riks_ds_utils
 site_url: https://Borg93.github.io/riks_ds_utils
-site_author: { { cookiecutter.maintainer } }
+site_author: Riksarkivet
 site_description: >-
   Work in progress ...
 repo_name: Borg93/riks_ds_utils
-repo_url: { { cookiecutter.repo_url } }
+repo_url: https://Borg93.github.io/riks_ds_utils
 
 # Copyright
 copyright: Copyright &copy; 2023 Riksarkivet
@@ -13,7 +13,6 @@ copyright: Copyright &copy; 2023 Riksarkivet
 # Configuration
 theme:
   name: material
-  custom_dir: docs/overrides/
   features:
     - navigation.tabs
     - navigation.sections
@@ -38,14 +37,15 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  favicon: assets/fav-removebg-preview.png
-  icon:
-    logo: logo
-  logo: assets/fav-removebg-preview.png
+  # favicon: assets/fav-removebg-preview.png
+  # icon:
+  #   logo: logo
+  # logo: assets/fav-removebg-preview.png
 
 plugins:
   - tags
   - search
+  - mkdocstrings
   - mkdocs-jupyter:
       include_source: True
 
@@ -102,4 +102,5 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Readme: README.md
+  - Readme: index.md
+  - Refrence API: api.md
