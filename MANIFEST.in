@@ -1,1 +1,2 @@
 include src/riks_ds_utils/assets/*.txt
+include docs/*

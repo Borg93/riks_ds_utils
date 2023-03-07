@@ -69,6 +69,12 @@ local_install:
 	@echo Installing python packages...
 	$(PIP) install -e .
 
+test_install:
+	@echo _
+	@echo Installing python packages...
+	pip install -e .
+	pip install -r requirements_dev.txt
+
 # For tests
 local_dev_install:
 	$(PIP) install -r requirements_dev.txt
@@ -94,9 +100,9 @@ test_tox:
 local_build: build local_clean
 	
 build:
-	@echo "Building package ${PACKAGE}"
-	$(PIP) install build
-	${PYTHON} -m build
+	@echo "Building package"
+	pip install build
+	python -m build
 
 # Clean local dev
 clean_venv: local_clean
@@ -123,7 +129,7 @@ docker_build:
 	@echo dont forget to remove image or rebuild it..
 
 docs_install:
-	$(PIP) install build mkdocs == 1.4.2
-	$(PIP) install build mkdocs-material == 8.5.11
-	$(PIP) install build mkdocs-jupyter == 0.22.0
+	pip install build mkdocs == 1.4.2
+	pip install build mkdocs-material == 8.5.11
+	pip install build mkdocs-jupyter == 0.22.0
 
