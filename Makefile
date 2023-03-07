@@ -111,17 +111,26 @@ clean_venv: local_clean
 	rm -rf $(VENV)
 
 .PHONY: local_clean
-local_clean:
+local_clean_windows:
 	@echo "Cleaning local folders:"
 	if exist "dist" rmdir /S dist
 	if exist ".pytest_cache" rmdir /S .pytest_cache
 	if exist ".mypy_cache" rmdir /S .mypy_cache
 	if exist ".tox" rmdir /S .tox
-	if exist "src\package_name.egg-info" rmdir /S src\package_name.egg-info
+	if exist "src\${PACKAGE}.egg-info" rmdir /S src\${PACKAGE}.egg-info
 	if exist "src\${PACKAGE}\__pycache__" rmdir /S src\${PACKAGE}\__pycache__
 	if exist "tests\unit\__pycache__" rmdir /S tests\unit\__pycache__
 	if exist ".coverage" del .coverage
 
+local_clean_linux:
+	rm -r dist
+	rm -r .pytest_cache
+	rm -r .mypy_cache
+	rm -r .tox
+	rm -r src/${PACKAGE}.egg-info
+	rm -r src/${PACKAGE}/__pycache__
+	rm -r tests/unit/__pycache__
+	rm .coverage
 
 docker_build:
 	docker build -t riks_ds_utils .

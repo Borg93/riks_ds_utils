@@ -1,7 +1,5 @@
 # riks_ds_utils
 
-Long description of project.
-
 ## Package versioning
 
 Package version
