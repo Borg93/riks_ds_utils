@@ -1,4 +1,4 @@
-name: Auto Docs 📃
+name: Automatic generating docs for 📦
 
 on:
   push:
