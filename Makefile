@@ -139,6 +139,7 @@ docker_build:
 
 docs_install:
 	pip install 'mkdocs ==1.4.2'
-	pip install 'mkdocs-material ~=8.5.11'
+	pip install 'mkdocs-material >=8.0.0'
 	pip install 'mkdocs-jupyter ~=0.22.0'
-	pip install 'mkdocstrings[python]'
+	pip install 'mkdocstrings>=0.20.0'
+	pip install 'mkdocstrings-python >= 0.8'

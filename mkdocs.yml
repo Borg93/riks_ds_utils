@@ -37,19 +37,30 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  # favicon: assets/fav-removebg-preview.png
-  # icon:
-  #   logo: logo
-  # logo: assets/fav-removebg-preview.png
+  favicon: docs/images/riks.png
+  logo: docs/images/riks.png
+  icon:
+    logo: logo
 
 plugins:
   - tags
   - search
   - mkdocstrings:
-    watch:
-      - src/riks_ds_utils
-  - mkdocs-jupyter:
-      include_source: True
+      default_handler: python
+      handlers:
+        python:
+          rendering:
+            show_root_toc_entry: False
+            show_root_heading: True
+            show_source: True
+            show_category_heading: False
+            show_bases: False
+          selection:
+            filters:
+              - "!^_" # exclude all members starting with _
+
+  # - mkdocs-jupyter:
+  #     include_source: True
 
 extra:
   social:
@@ -104,5 +115,6 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Readme: index.md
+  - Getting Started: README.md
   - Refrence API: api.md
+  - Changelog: changelog.md
