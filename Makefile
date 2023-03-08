@@ -1,6 +1,6 @@
 .ONESHELL:
 
-include .env
+#include .env
 
 VENV = venv
 PYTHON = $(VENV)/Scripts/python
