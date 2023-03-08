@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def aggregate_mean(df, column):
+def aggregate_mean(df:pd.DataFrame , column:str) -> dict:
     """ Computes and returns the mean value of a column 
 
     Args: 
