@@ -1,3 +1,3 @@
 ## API:
 
-::: src.riks_ds_utils.main
+::: src.riks_ds_utils.main.aggregate_mean
