@@ -46,6 +46,8 @@ plugins:
   - tags
   - search
   - mkdocstrings:
+      watch:
+        - src/riks_ds_utils
       default_handler: python
       handlers:
         python:
