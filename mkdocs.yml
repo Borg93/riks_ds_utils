@@ -37,8 +37,8 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  favicon: docs/images/riks.png
-  logo: docs/images/riks.png
+  favicon: https://raw.githubusercontent.com/Borg93/riks_ds_utils/main/docs/images/riks.png
+  logo: https://raw.githubusercontent.com/Borg93/riks_ds_utils/main/docs/images/riks.png
   icon:
     logo: logo
 
