@@ -45,7 +45,9 @@ theme:
 plugins:
   - tags
   - search
-  - mkdocstrings
+  - mkdocstrings:
+    watch:
+      - src/riks_ds_utils
   - mkdocs-jupyter:
       include_source: True
 
