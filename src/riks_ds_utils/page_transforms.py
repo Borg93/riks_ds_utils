@@ -144,18 +144,17 @@ class PageTransforms:
 
         ocr_dataset['metainfo'] = {'classes': [elem_type]}
         ocr_dataset['data_list'] = list()
-        
+
         xmls, imgs = PageTransforms._gather_xmls_imgs(page_path, imgs_path)
 
         for idx, (image, page) in enumerate(zip(imgs, xmls)):  
 
             tree = ET.parse(page)
-            root=tree.getroot()
+            root = tree.getroot()
 
             image_instance = dict()
             file_name = Path(image).name
             height, width = PageTransforms._get_img_shape(image)
-            
 
             schema_formatted = '{' + schema + '}'
 
@@ -168,7 +167,7 @@ class PageTransforms:
 
                 bbox = list()
                 poly = list()
-                text=''
+                text = ''
                 empty_text_field = False
 
                 for child in elem:
@@ -200,6 +199,4 @@ class PageTransforms:
 
 
 if __name__ == "__main__":
-    
-
     pass
