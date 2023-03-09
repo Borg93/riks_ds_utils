@@ -40,7 +40,12 @@ class PageTransforms:
         py = [y for (x, y) in temp]
         poly = [p for x in temp for p in x]
 
-        x_min, y_min, x_max, y_max = (min(px), min(py), max(px), max(py))
+        try:
+            x_min, y_min, x_max, y_max = (min(px), min(py), max(px), max(py))
+        except Exception as e:
+            print(e)
+            return (None, None, None)
+
         bbox = [x_min, y_min, x_max - x_min, y_max - y_min]
 
         area = (x_max - x_min) * (y_max - y_min)
@@ -55,13 +60,16 @@ class PageTransforms:
 
     def page_to_coco(page_path: str, imgs_path: str, out_path: str, elems: list, schema: str = ""):
         """_summary_
+        Convert PAGE-files to coco-annotation file for use in training object detection or instance segmentation models
+        Put all the PAGE-files in one directory and all the image files in another, they have to be named the same
+        except for file-ending.
 
         Args:
-            page_path (str): _description_
-            imgs_path (str): _description_
-            out_path (str): _description_
-            elems (list): _description_
-            schema (str, optional): _description_. Defaults to ''.
+            page_path (str): Path to PAGE files
+            imgs_path (str): Path to images
+            out_path (str): Path to json-outfile
+            elems (list): List of the elements you wish to include in coco, for instance TextLine or TextRegion
+            schema (str, optional): xml-schema that the PAGE-files are using, you can look it up in the PAGE-files
         """
 
         xmls, imgs = PageTransforms._gather_xmls_imgs(page_path, imgs_path)
@@ -165,10 +173,10 @@ class PageTransforms:
                     elif child.tag == schema_formatted + "Coords":
                         bbox, _, poly = PageTransforms._get_bbox_area_poly_from_coords(child)
 
-                if not empty_text_field:
+                if not empty_text_field and bbox != None:
                     image_instance["instances"].append(dict(bbox=bbox, bbox_label=1, mask=poly, text=text))
 
-                ocr_dataset["data_list"].append(image_instance)
+                    ocr_dataset["data_list"].append(image_instance)
 
         PageTransforms._write_json(out_path, ocr_dataset)
 
