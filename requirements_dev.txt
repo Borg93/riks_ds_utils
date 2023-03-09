@@ -7,3 +7,4 @@ black==22.8.0
 mypy==0.981
 coverage
 isort
+ruff==0.0.254

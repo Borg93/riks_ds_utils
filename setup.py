@@ -27,6 +27,7 @@ MAINTAINER = "Riksarkivet"
 LICENSE = "MIT"
 PROJECT_URL = "https://github.com/Borg93/riks_ds_utils"
 
+
 def setup_package():
     setup(
         name=DISTNAME,
@@ -43,7 +44,7 @@ def setup_package():
             "Programming Language :: Python :: 3",
             "Operating System :: Unix",
             "Operating System :: MacOS :: MacOS X",
-            "Operating System :: Microsoft :: Windows"
+            "Operating System :: Microsoft :: Windows",
         ],
         python_requires=">=3.9",
         install_requires=base_packages,
@@ -54,6 +55,7 @@ def setup_package():
         extras_require={"tests": test_packages},
         data_files=[("requirements", ["requirements.txt", "requirements_dev.txt"])],
     )
+
 
 if __name__ == "__main__":
     setup_package()

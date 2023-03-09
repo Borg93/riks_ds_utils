@@ -1,9 +1,11 @@
-import pandas as pd
+# import pandas as pd
 from typing import TypeVar
 
-DataFrame = TypeVar('pandas.core.frame.DataFrame')
 
-def aggregate_mean(df :DataFrame, column:str) -> dict:
+DataFrame = TypeVar("pandas.core.frame.DataFrame")
+
+
+def aggregate_mean(df: DataFrame, column: str) -> dict:
     """Computes and returns the mean value of a column
 
     Args:
@@ -19,8 +21,6 @@ def aggregate_mean(df :DataFrame, column:str) -> dict:
 if __name__ == "__main__":
     print("hello world")
 
-
-
     # Usage:
 
     # How to use the function:
@@ -29,6 +29,5 @@ if __name__ == "__main__":
     # from riks_ds_utils.main import aggregate_mean
 
     # mean_dict = aggregate_mean(df, column)
-    
+
     # ```
-    
