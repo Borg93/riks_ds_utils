@@ -58,6 +58,25 @@ class PageTransforms:
             json_str = json.dumps(dataset, indent=4, ensure_ascii=False)
             f.write(json_str)
 
+    def _standardize_eol(ocr_dataset):
+
+        suffix1 = '-'
+        suffix2 = '='
+
+        for line in ocr_dataset['data_list']:
+            for annot in line['instances']:
+                annot['text'] = annot['text'].strip()
+
+                if annot['text'].endswith('-'):
+                    print(annot['text'])
+                    annot['text'] = annot['text'].removesuffix(suffix1) + '¬'
+                    print(annot['text'])
+
+                if annot['text'].endswith('='):
+                    annot['text'] = annot['text'].removesuffix(suffix2) + '¬'
+
+        return ocr_dataset
+
     def page_to_coco(page_path: str, imgs_path: str, out_path: str, elems: list, schema: str = ""):
         """_summary_
         Convert PAGE-files to coco-annotation file for use in training object detection or instance segmentation models
@@ -140,7 +159,6 @@ class PageTransforms:
             tree = ET.parse(page)
             root = tree.getroot()
 
-            image_instance = dict()
             file_name = Path(image).name
             height, width = PageTransforms._get_img_shape(image)
 
@@ -148,6 +166,7 @@ class PageTransforms:
 
             for elem in root.iter(schema_formatted + elem_type):
 
+                image_instance = dict()
                 image_instance["instances"] = list()
                 image_instance["img_path"] = file_name
                 image_instance["height"] = height
@@ -160,7 +179,7 @@ class PageTransforms:
 
                 for child in elem:
 
-                    if child.tag == "{http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15}TextEquiv":
+                    if child.tag == schema_formatted + "TextEquiv":
 
                         for text_field in child:
 
@@ -178,7 +197,38 @@ class PageTransforms:
 
                     ocr_dataset["data_list"].append(image_instance)
 
+        ocr_dataset = PageTransforms._standardize_eol(ocr_dataset)
+
         PageTransforms._write_json(out_path, ocr_dataset)
+
+    def extract_dict_from_page(path_to_page, schema=''):
+
+        xmls = glob(os.path.join(path_to_page, '**'))
+        char_set = ''
+
+        for i, xml in enumerate(xmls):
+            tree = ET.parse(xml)
+            root = tree.getroot()
+
+            schema_formatted = '{' + schema + '}'
+
+            for text_line in root.iter(schema_formatted + 'TextLine'):
+
+                for child in text_line:
+                    if child.tag == schema_formatted + 'TextEquiv':
+                        for text_field in child:
+                            try:
+                                char_list = [char for char in text_field.text]
+                                for ch in char_list:
+                                    if ch not in char_set:
+                                        char_set += ch
+                            except Exception as e:
+                                pass
+
+        char_set_list = [char for char in char_set]
+        char_set_list.sort()
+
+        return char_set_list
 
 
 if __name__ == "__main__":
