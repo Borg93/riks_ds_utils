@@ -254,7 +254,7 @@ class PageTransforms:
 
         return char_set_list
 
-    def crop_text_reg_write_text_line_coco(page_files: list, imgs: list, coco_out: str):
+    def crop_text_reg_write_text_line_coco(page_files: list, imgs: list, coco_out: str, binarized: bool):
         # think about folder structure of the resulting dataset
 
         schema = "{" + "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15" + "}"
@@ -279,7 +279,13 @@ class PageTransforms:
                         rect, cropped = PageTransforms._get_image_from_page_coords(img, child)
 
                 if cropped is not None:
-                    out_folder = os.path.join(*PurePath(img).parts[0:-2], 'text_regions')
+
+                    if binarized:
+                        out_folder_suffix = '_bin'
+                    else:
+                        out_folder_suffix = '_ori'
+
+                    out_folder = os.path.join(*PurePath(img).parts[0:-2], 'text_regions' + out_folder_suffix)
 
                     img_out = os.path.join(out_folder, Path(img).stem + "_" + str(region_nr).zfill(3) + ".jpg")
 
@@ -317,7 +323,7 @@ class PageTransforms:
 
         PageTransforms._write_json(coco_out, coco_regions)
 
-    def crop_line_imgs_page(page_file: str, image: str, dataset_path: str, line_imgs_path: str, gt_path: str, schema: str = ""):
+    def crop_line_imgs_page(page_file: str, image: str, dataset_path: str, line_imgs_path: str, gt_path: str, schema: str, binarized: bool):
         """_summary_
         Crop line images from page file using field coords(polygon), writes line_images to specified path
         and writes jsonline gt_file to specified path
@@ -402,7 +408,11 @@ class PageTransforms:
                     continue
 
         # write gt_file for entire image
-        path_to_ground_truths = os.path.join(gt_path, Path(image).stem + "_" + "gt.txt")
+        if binarized:
+            bin = 'bin_'
+        else:
+            bin = ''
+        path_to_ground_truths = os.path.join(gt_path, Path(image).stem + "_" + bin + "gt.txt")
         with open(path_to_ground_truths, "w") as f:
             for gt in ground_truths:
                 s = json.dumps(gt, ensure_ascii=False)
